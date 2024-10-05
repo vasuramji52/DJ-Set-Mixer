@@ -12,6 +12,9 @@ import {
   UserButton
 } from '@clerk/nextjs';
 import {useRouter} from 'next/navigation';
+import {Monoton} from 'next/font/google'
+
+const monoton = Monoton({subsets: ['latin'], weight: ['400'], color: "e1a2f2"})
 
 export default function Home() {
   return (
@@ -28,13 +31,28 @@ export default function Home() {
         <meta name = "description" content = "Create flashcard from your text" />
       </Head>
 
-      <AppBar position = "static" sx = {{width: "100%"}}>
-        <Toolbar>
-          <Typography variant = "h6" style = {{flexGrow: 1}}>MIXER AI.</Typography>
+      
+        <Toolbar style = {{
+          flexDirection:'row',
+          justifyContent: 'right',
+          textAlign: 'top'
+        }}>
           <Button color="inherit" href = "/">Login</Button>
           <Button color = "inherit" href = "/">Sign Up</Button>
         </Toolbar>
-      </AppBar>
+        <Box sx={{textAlign: 'center', my:6}}>
+          <Typography 
+            className={monoton.className} 
+            variant="h1" 
+            style={{ 
+              flexGrow: 1, 
+              color: '#e1a2f2'  // Set the color to e1a2f2
+            }}>
+            MIXER AI.
+          </Typography>
+        </Box>
+  
+        
         <title>MIXER AI.</title>
     </Container>
   );
