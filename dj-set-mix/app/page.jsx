@@ -49,7 +49,7 @@
   export default function Home() {
     const router = useRouter();
 
-    const handleButtonClick = () => {
+    const handleImageClick = () => {
       router.push('/');
     }; 
 
@@ -65,7 +65,7 @@
             alignItems: 'center',
             textAlign: 'top'
           }}>
-            <Button color="inherit" href = "/">Login</Button>
+            <Button color="inherit" href = "/sign-in">Login</Button>
             <Button color = "inherit" href = "/">Sign Up</Button>
           </Toolbar>
           <Box sx={{textAlign: 'center', my:6}}>
@@ -92,7 +92,7 @@
             </motion.div>
             </motion.div>
           </Box>
-          <Box sx={{position: 'relative', textAlign: 'center', justifyContent: 'center', my: 6}}>
+          <Box sx={{position: 'relative', textAlign: 'center', justifyContent: 'center', my: 6, cursor: 'pointer'}}>
             <motion.img
               src="/assets/static_stereo.png" 
               alt="Pulsing Image"
@@ -102,32 +102,8 @@
                 width: '900px',  
                 height: 'auto',
               }}
+              onClick = {handleImageClick}
             />
-            <button
-              onClick = {handleButtonClick}
-              className = {styles.overlayButton}
-              style = {{
-                position: 'absolute',
-                top: '50%',
-                left: '10',
-                transform: 'translateY(-50%)', // Center the button vertically
-                background: 'transparent',
-                border: 'none',
-                cursor: 'pointer',
-              }}
-          >
-          <motion.div
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.9 }}
-            style={{
-              fontSize: '3rem',
-              color: '#ff1493', // Color of your icon
-            }}
-          >
-            {/* Add your react-icon here */}
-            <TfiMusicAlt />
-            </motion.div>
-            </button>
       </Box>
       </Container>
     );
