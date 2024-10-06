@@ -126,33 +126,35 @@ export default function Creation() {
                                 <Row>
                                     {trackSet.map(track => (
                                         <Col key={track.id} sm={3} md={3} lg={3}>
-                                            <Card className="mb-4"
-                                                  style={{ 
-                                                    width: '100%', 
-                                                    height: '260px', 
-                                                    overflow: 'hidden' // Ensures uniform height 
-                                                  }}>
-                                                <Card.Img
-                                                    variant="top"
-                                                    src={track.album.images && track.album.images.length > 0 
-                                                        ? track.album.images[0].url 
-                                                        : 'https://via.placeholder.com/150'}
-                                                    style={{ height: '160px', objectFit: 'cover' }} // Keeps image aspect ratio
-                                                />
-                                                <Card.Body>
-                                                    <Card.Title style={{ 
-                                                        whiteSpace: 'nowrap', 
-                                                        overflow: 'hidden', 
-                                                        textOverflow: 'ellipsis', 
-                                                        width: '100%'
+                                            <Button variant="link" className="transparent-button" style= {{width: '100%', height: '100%'}}>
+                                                <Card className="mb-4"
+                                                    style={{ 
+                                                        width: '100%', 
+                                                        height: '260px', 
+                                                        overflow: 'hidden' // Ensures uniform height 
                                                     }}>
-                                                        {truncateText(track.name, 20)} {/* Truncate title */}
-                                                    </Card.Title>
-                                                    <Typography>
-                                                        by {truncateText(track.artists[0].name, 20)}
-                                                    </Typography>
-                                                </Card.Body>
-                                            </Card>
+                                                    <Card.Img
+                                                        variant="top"
+                                                        src={track.album.images && track.album.images.length > 0 
+                                                            ? track.album.images[0].url 
+                                                            : 'https://via.placeholder.com/150'}
+                                                        style={{ height: '160px', objectFit: 'cover' }} // Keeps image aspect ratio
+                                                    />
+                                                    <Card.Body>
+                                                        <Card.Title style={{ 
+                                                            whiteSpace: 'nowrap', 
+                                                            overflow: 'hidden', 
+                                                            textOverflow: 'ellipsis', 
+                                                            width: '100%'
+                                                        }}>
+                                                            {truncateText(track.name, 20)} {/* Truncate title */}
+                                                        </Card.Title>
+                                                        <Typography>
+                                                            by {truncateText(track.artists[0].name, 20)}
+                                                        </Typography>
+                                                    </Card.Body>
+                                                </Card>
+                                            </Button>
                                         </Col>
                                     ))}
                                 </Row>
@@ -160,7 +162,7 @@ export default function Creation() {
                         ))}
                     </Carousel>
                 ) : (
-                    <p>No tracks found. Please search again.</p>
+                    <p></p>
                 )}
             </Container>
         </div>

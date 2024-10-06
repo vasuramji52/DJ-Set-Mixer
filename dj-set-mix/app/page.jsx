@@ -9,7 +9,8 @@
     SignInButton,
     SignedIn,
     SignedOut,
-    UserButton
+    UserButton,
+    useSession
   } from '@clerk/nextjs';
   import {useRouter} from 'next/navigation';
   import {motion} from 'framer-motion'
