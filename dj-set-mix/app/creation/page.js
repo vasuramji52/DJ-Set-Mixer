@@ -5,19 +5,19 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Box} from "@mui/material";
 import {Container, InputGroup, FormControl, Button, Card, Row, Col, Carousel, Modal} from 'react-bootstrap';
 import { useEffect, useState } from 'react';
-import { Typography, Icon } from '@mui/material';
+import { Typography, Icon, List, ListItem} from '@mui/material';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { ChevronRight } from '@mui/icons-material';
-import {Monoton} from 'next/font/google'
+import {Monoton, Poppins} from 'next/font/google'
 import styles from '../page.module.css';
 import {motion} from 'framer-motion'
 import Link from "next/link";
 
 
-
-
 const monoton = Monoton({subsets: ['latin'], weight: ['400']})
+
+const poppins = Poppins({subsets: ['latin'], weight: ['400']})
 
 
 const iconStyle = {
@@ -34,6 +34,10 @@ const CLIENT_SECRET_ID = "b62fc8432dbc421babca7833133de652"
 const truncateText = (text, maxLength) => {
     return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
 };
+
+
+
+
 
 
 export default function Creation() {
@@ -436,12 +440,29 @@ export default function Creation() {
                         ))}
                     </Row>
 
-
                     {aiResponse && (
-                        <Box sx={{ mt: 4 }}>
-                            <Typography variant="body1" color="#ffffff">
+                        <Box sx={{ mt: 4, backgroundColor: "#e1a2f2", borderRadius:8 }}>
+                            <Typography variant="body1" color="#000000" className={poppins.className}>
                                 {/* Assuming aiResponse is now a JSON object or string, display the response */}
-                                {typeof aiResponse === 'string' ? aiResponse : JSON.stringify(aiResponse, null, 2)}
+                                {typeof aiResponse === 'string'
+                ? aiResponse.split('\n').map((line, index) => (
+                    <List key={index}>
+                    <ListItem sx={{ color: '#000', fontWeight: 500 }}>
+                        {line.startsWith('-') ? (
+                        <Typography variant="h5" component="div" className = {poppins.className}>
+                            {line.replace('Header', '<strong>Header</strong>')}
+                        </Typography>
+                        ) : line.startsWith('-**') ? (
+                        <ListItem sx={{ paddingLeft: 2 }}>
+                            {line.replace('-**', '')}
+                        </ListItem>
+                        ) : (
+                        line
+                        )}
+                    </ListItem>
+                    </List>
+          ))
+        : JSON.stringify(aiResponse, null, 2)}
                             </Typography>
                         </Box>
                     )}
