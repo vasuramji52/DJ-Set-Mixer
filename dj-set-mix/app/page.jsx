@@ -4,17 +4,10 @@
   import { Container, Box, Typography, AppBar, Toolbar, Button, Grid} from "@mui/material";
   import styles from "./page.module.css";
   import Head from "next/head";
-  import {
-    ClerkProvider,
-    SignInButton,
-    SignedIn,
-    SignedOut,
-    UserButton
-  } from '@clerk/nextjs';
   import {useRouter} from 'next/navigation';
   import {motion} from 'framer-motion'
   import {Monoton} from 'next/font/google'
-  import { TfiMusicAlt } from "react-icons/tfi";
+  import {ClerkProvider, SignedIn, SignedOut, UserButton, SignInButton} from '@clerk/nextjs'
 
   // create the monoton font
   const monoton = Monoton({subsets: ['latin'], weight: ['400']})
@@ -49,7 +42,7 @@
   export default function Home() {
     const router = useRouter();
 
-    const handleImageClick = () => {
+    const handleButtonClick = () => {
       router.push('/');
     }; 
 
@@ -66,7 +59,7 @@
             textAlign: 'top'
           }}>
             <Button color="inherit" href = "/sign-in">Login</Button>
-            <Button color = "inherit" href = "/">Sign Up</Button>
+            <Button color = "inherit" href = "/sign-up">Sign Up</Button>
           </Toolbar>
           <Box sx={{textAlign: 'center', my:6}}>
             <motion.div
@@ -92,7 +85,7 @@
             </motion.div>
             </motion.div>
           </Box>
-          <Box sx={{position: 'relative', textAlign: 'center', justifyContent: 'center', my: 6, cursor: 'pointer'}}>
+          <Box sx={{position: 'relative', textAlign: 'center', justifyContent: 'center', my: 6}}>
             <motion.img
               src="/assets/static_stereo.png" 
               alt="Pulsing Image"
@@ -102,9 +95,36 @@
                 width: '900px',  
                 height: 'auto',
               }}
-              onClick = {handleImageClick}
             />
+            <button
+              onClick = {handleButtonClick}
+              className = {styles.overlayButton}
+              style = {{
+                position: 'absolute',
+                top: '50%',
+                left: '10',
+                transform: 'translateY(-50%)', // Center the button vertically
+                background: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+              }}
+          >
+          <motion.div
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+            style={{
+              fontSize: '3rem',
+              color: '#ff1493', // Color of your icon
+            }}
+          >
+            {/* Add your react-icon here */}
+            </motion.div>
+            </button>
       </Box>
+
+      <Button variant="contained" color="primary" sx={{mt: 2, mr: 2}} href="/creation">
+            Get Started
+      </Button>
       </Container>
     );
   }
