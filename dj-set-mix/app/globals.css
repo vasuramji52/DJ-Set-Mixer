@@ -35,6 +35,11 @@ a {
   text-decoration: none;
 }
 
+.no-underline {
+  text-decoration: none; /* Removes underline */
+  color: inherit; /* Inherits the text color from the parent */
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
