@@ -4,17 +4,10 @@
   import { Container, Box, Typography, AppBar, Toolbar, Button, Grid} from "@mui/material";
   import styles from "./page.module.css";
   import Head from "next/head";
-  import {
-    ClerkProvider,
-    SignInButton,
-    SignedIn,
-    SignedOut,
-    UserButton,
-    useSession
-  } from '@clerk/nextjs';
   import {useRouter} from 'next/navigation';
   import {motion} from 'framer-motion'
   import {Monoton} from 'next/font/google'
+  import {ClerkProvider, SignedIn, SignedOut, UserButton, SignInButton} from '@clerk/nextjs'
 
   // create the monoton font
   const monoton = Monoton({subsets: ['latin'], weight: ['400']})
