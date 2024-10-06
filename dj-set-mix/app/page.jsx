@@ -43,7 +43,7 @@
     const router = useRouter();
 
     const handleButtonClick = () => {
-      router.push('/');
+      router.push('/creation');
     }; 
 
     return (
@@ -95,6 +95,7 @@
                 width: '900px',  
                 height: 'auto',
               }}
+              onClick = {handleButtonClick}
             />
             <button
               onClick = {handleButtonClick}
@@ -121,10 +122,11 @@
             </motion.div>
             </button>
       </Box>
-
-      <Button variant="contained" color="primary" sx={{mt: 2, mr: 2}} href="/creation">
+      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+      <Button variant="contained" color="primary" sx={{mt: 2, mr: 2, mt: 2, backgroundColor: '#e1a2f2', color: {variants: {colorVariants}, animate : "colorChange"}, '&:hover':{backgroundColor: '#97fce3'} }} href="/creation" className = "rounded-full bg-white group-hover:bg-accent">
             Get Started
       </Button>
+      </Box>
       </Container>
     );
   }
