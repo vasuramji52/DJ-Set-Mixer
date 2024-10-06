@@ -168,3 +168,29 @@ a.secondary {
     filter: invert();
   }
 }
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-album {
+  animation: spin 8s linear infinite;
+  /* Adjust the speed of the rotation (e.g., 5s for 5 seconds per full rotation) */
+}
+
+.btn-custom-color {
+  background-color: #e1a2f2;
+  color: white;
+  border: none;
+}
+
+.btn-custom-color:hover {
+  background-color: #97fce3;
+}
+
+

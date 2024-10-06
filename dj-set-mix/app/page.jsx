@@ -47,7 +47,7 @@
     }; 
 
     return (
-      <Container maxWidth = "100vw">
+      <Container maxWidth = "100vw" color = "black">
         <Head
         >MIXER AI.
           <meta name = "description" content = "Create flashcard from your text" />
@@ -58,8 +58,8 @@
             alignItems: 'center',
             textAlign: 'top'
           }}>
-            <Button color="inherit" href = "/sign-in">Login</Button>
-            <Button color = "inherit" href = "/sign-up">Sign Up</Button>
+            <Button href = "/sign-in" sx = {{ mr: 2, color:'#e1a2f2'}}>Login</Button>
+            <Button href = "/sign-up" sx = {{ml: 2, color:'#97fce3'}}>Sign Up</Button>
           </Toolbar>
           <Box sx={{textAlign: 'center', my:6}}>
             <motion.div
@@ -122,11 +122,22 @@
             </motion.div>
             </button>
       </Box>
-      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+      
+      <Box sx = {{display: 'flex', justifyContent:'center'}}>
+        <Typography variant = "h3">
+          Click the mixer to begin.
+        </Typography>
+      </Box>
+      <Box sx = {{display: 'flex', justifyContent: 'center'}}>
+      <Typography variant = "body1">
+          Take your DJ skills to a new level.
+      </Typography>
+      </Box>
+      {/* <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
       <Button variant="contained" color="primary" sx={{mt: 2, mr: 2, mt: 2, backgroundColor: '#e1a2f2', color: {variants: {colorVariants}, animate : "colorChange"}, '&:hover':{backgroundColor: '#97fce3'} }} href="/creation" className = "rounded-full bg-white group-hover:bg-accent">
             Get Started
       </Button>
-      </Box>
+      </Box> */}
       </Container>
     );
   }

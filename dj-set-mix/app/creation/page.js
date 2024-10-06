@@ -2,12 +2,19 @@
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Box} from "@mui/material";
-import {Container, InputGroup, FormControl, Button, Card, Row, Col, Carousel} from 'react-bootstrap';
+import {Container, InputGroup, FormControl, Button, Card, Row, Col, Carousel, Modal} from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { Typography, Icon } from '@mui/material';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { ChevronRight } from '@mui/icons-material';
+import {Monoton} from 'next/font/google'
+import styles from '../page.module.css';
+import {motion} from 'framer-motion'
+import Link from "next/link";
+
+
+const monoton = Monoton({subsets: ['latin'], weight: ['400']})
 
 const iconStyle = {
     color: '#e1a2f2',
@@ -30,6 +37,8 @@ export default function Creation() {
 
     const [selectedTracks, setSelectedTracks] = useState([]);
     const [aiResponse, setAiResponse] = useState("");
+    const [showModal, setShowModal] = useState(false); // State to handle modal visibility
+    const [currentTrackInfo, setCurrentTrackInfo] = useState(null); // State for track details in modal
 
     useEffect(() => {
         var authParameters = {
@@ -138,6 +147,40 @@ export default function Creation() {
             console.error("Error generating AI response: ", error);
         }
     }
+
+    const handleTrackClick = (track) => {
+        setCurrentTrackInfo(track); // Set the track info to be shown
+        setShowModal(true); // Open the modal
+    };
+
+    const handleCloseModal = () => setShowModal(false); // Close the modal
+
+    const pulseVariants = {
+        pulse: {
+          scale: [1, 1.1, 1],
+          opacity: [1, 0.95, 1],
+          transition: {
+            duration: 1.5,
+            ease: 'easeInOut',
+            color: "#97fce3",
+            repeat: Infinity,
+            repeatType: 'loop'
+          },
+        }
+      };
+
+      const colorVariants = {
+        colorChange: {
+          color: ['#e1a2f2', '#97fce3','#d1ff7a', '#fc979f', '#619eff'],  // Color change from #e1a2f2 to #97fce3 and back
+          transition: {
+            duration: 3,
+            ease: 'easeInOut',
+            repeat: Infinity,
+            repeatType: 'loop'
+          }
+        }
+      }
+
     const TrackInfo = ({ track }) => {
         const {features} = track; 
         return (
@@ -173,11 +216,34 @@ export default function Creation() {
     };
 
     return (
-        <div className="App">
-            <Container>
+        <div className="App" style = {{backgroundColor: "black", minHeight:'100vh'}}>
+            <Box sx={{textAlign: 'center', my:1}}>
+            <motion.div
+              variants = {pulseVariants}
+              animate = "pulse"
+              style = {{
+                display:'inline-block',
+              }}
+            >
+            <motion.div
+              variants={colorVariants}
+              animate="colorChange"
+            >
+              <Link href ="/" passHref>
+              <Typography 
+                className={monoton.className} 
+                variant="h1" 
+                >
+                MIXER AI.
+              </Typography>
+              </Link>
+            </motion.div>
+            </motion.div>
+          </Box>
+            <Container style={{ backgroundColor: 'black'}}>
                 <InputGroup className="mb=3" size="lg">
                     <FormControl
-                        placeholder="Search For track"
+                        placeholder="Search for track"
                         type="input"
                         onKeyDown={event => {
                             if(event.key == "Enter") {
@@ -186,7 +252,12 @@ export default function Creation() {
                         }} 
                         onChange={event => setSearchFirstInput(event.target.value)}
                     /> 
-                    <Button onClick={search}>
+                    <Button onClick={search} style={{
+                        backgroundColor: '#e1a2f2',
+                        color: '#fff',
+                        border: 'none',
+                        padding: '10px 20px',
+                    }}>
                         Search
                     </Button>
                 </InputGroup>
@@ -222,6 +293,7 @@ export default function Creation() {
                                                 onClick={() => {
                                                     selectTrack(track); // Call selectTrack here
                                                 }}>
+                                                
                                                 <Card className="mb-4"
                                                     style={{ 
                                                         width: '100%', 
@@ -267,25 +339,61 @@ export default function Creation() {
             </Container>
 
             {selectedTracks.length > 0 && (
-                <Container>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', mb: 2  }}>
-                        <Typography variant="h3" sx={{ mb: 2 }}>Tracklist</Typography>
+                <Container styles = {{backgroundColor: "black"}}>
+                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', mb: 1}}>
+                        <Typography variant="h3" sx={{ mb: 2 , mb: 1, fontFamily: 'Monoton, sans-serif', color:"#e1a2f2"}} className={monoton.className}>Tracklist</Typography>
 
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            sx={{ ml: 2, padding: '4px 8px', minWidth: 'auto' }}
-                            onClick={generateAISuggestion}
-                        >
-                            Mash!
+                        
+                    </Box>
+                    <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+                        <motion.div variants = {pulseVariants} animate = "pulse">
+                        <Button variant="contained" sx={{mt: 4, mr: 4, mt: 4, backgroundColor: '#e1a2f2', '&:hover':{backgroundColor: '#97fce3'}, minWidth:"150px", height:"60px" }} href="/creation" className = "rounded-full bg-white group-hover:bg-accent">
+                                Mash! 
                         </Button>
+                        </motion.div>
                     </Box>
+                    
 
-                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                    <Row>
                         {selectedTracks.map(track => (
-                            <TrackInfo key={track.id} track={track} />
+                            <Col key = {track.id} sm = {6} md = {6}>
+                                <Box sx = {{
+                                    padding: 2,
+                                    backgroundColor: 'transparent', 
+                                    borderRadius: 1,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center', // Center align the content
+                                    marginBottom: 2 // Space between the cards
+                                }}>
+                                    <motion.div variants = {pulseVariants} animate = "pulse">
+                                    <img
+                                        className = {styles['spin-album']}
+                                        src={track.album.images && track.album.images.length > 0 
+                                            ? track.album.images[0].url 
+                                            : 'https://via.placeholder.com/150'} 
+                                        alt={track.name} 
+                                        onClick={() => handleTrackClick(track)} // Open modal on click
+                                        style={{
+                                            borderRadius: '50%', // Circular album cover
+                                            width: '180px', // Set width
+                                            height: '180px', // Set height
+                                            objectFit: 'cover', // Maintain aspect ratio
+                                            marginBottom: '15px' // Space below the image
+                                        }} 
+                                        
+                                    />
+                                    </motion.div>
+                                    <Typography variant="h6" sx={{ textAlign: 'center', fontWeight: 'bold', color:"#e1a2f2" }} className={monoton.className}>
+                                        {track.name || "N/A"}
+                                    </Typography>
+                                    <Typography variant="body1" sx={{ textAlign: 'center', color: '#97fce3' }}>
+                                        {track.artists[0]?.name || "Unknown Artist"}
+                                    </Typography>
+                                </Box>
+                            </Col>
                         ))}
-                    </Box>
+                    </Row>
 
                     {aiResponse && (
                         <Box sx={{mt: 4}}>
@@ -294,6 +402,44 @@ export default function Creation() {
                     )}
                 </Container>
             )}
+            {/* Modal to show track details */}
+            <Modal show={showModal} onHide={handleCloseModal} centered size="lg">
+                <Modal.Header closeButton>
+                    <Modal.Title>Track Details</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {currentTrackInfo && (
+                        <>
+                            <Typography variant="h6">
+                                Name: {currentTrackInfo?.name || 'N/A'}
+                            </Typography>
+                            <Typography variant="body1">
+                                Artist: {currentTrackInfo?.artists?.[0]?.name || 'TBD'}
+                            </Typography>
+                            <Typography variant="body1">
+                                Album: {currentTrackInfo?.album?.name || 'N/A'}
+                            </Typography>
+                            <Typography variant="body1">
+                                Tempo: {currentTrackInfo.features?.tempo || 'N/A'}
+                            </Typography>
+                            <Typography variant="body1">
+                                Key: {currentTrackInfo.features?.key || 'N/A'}
+                            </Typography>
+                            <Typography variant="body1">
+                                Beats: {currentTrackInfo.features?.beats || 'N/A'}
+                            </Typography>
+                            <Typography variant="body1">
+                                Acousticness: {currentTrackInfo.features?.acousticness || 'N/A'}
+                            </Typography>
+                        </>
+                    )}
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseModal}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 }

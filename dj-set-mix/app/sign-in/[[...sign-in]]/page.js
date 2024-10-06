@@ -64,6 +64,33 @@ export default function SignUpPage() {
         </Link>
       </Toolbar>
 
+      <Box sx={{textAlign: 'center', my:1}}>
+            <motion.div
+              variants = {pulseVariants}
+              animate = "pulse"
+              style = {{
+                display:'inline-block',
+              }}
+            >
+            <motion.div
+              variants={colorVariants}
+              animate="colorChange"
+            >
+              <Link href = "/" passHref>
+              <Typography 
+                className={monoton.className} 
+                variant="h1" 
+                style={{ 
+                  flexGrow: 1,  
+                }}
+                >
+                MIXER AI.
+              </Typography>
+              </Link>
+            </motion.div>
+            </motion.div>
+          </Box>
+
       {/* Grid layout to divide the page into two sections */}
       <Grid container sx={{ height: '100vh' }}>
         {/* Left side for image */}
@@ -106,8 +133,8 @@ export default function SignUpPage() {
                 initial={{ strokeDasharray: "14 10 0 0" }}
                 animate={{
                   strokeDasharray: [
-                    "24 10 0 0", 
-                    "16 25 92 72", 
+                    "16 25 92 72",
+                    "24 10 0 0",  
                     "24 10 0 0"
                   ],
                   rotate: [0, 360]  // Rotate around the center
@@ -140,7 +167,7 @@ export default function SignUpPage() {
                 cx="253" 
                 cy="253" 
                 r="200" 
-                stroke="#97fce3" 
+                stroke="#d1ff7a" 
                 strokeWidth="5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -181,15 +208,15 @@ export default function SignUpPage() {
                 cx="253" 
                 cy="253" 
                 r="100" 
-                stroke="#97fce3" 
+                stroke="#fc979f" 
                 strokeWidth="5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 initial={{ strokeDasharray: "14 10 0 0" }}
                 animate={{
                   strokeDasharray: [
-                    "24 10 0 0", 
-                    "16 25 92 72", 
+                    "16 25 92 72",
+                    "24 10 0 0",  
                     "24 10 0 0"
                   ],
                   rotate: [0, 360]  // Rotate around the center
@@ -263,16 +290,16 @@ export default function SignUpPage() {
                 cx="253" 
                 cy="253" 
                 r="50" 
-                stroke="#97fce3" 
+                stroke="#e1a2f2" 
                 strokeWidth="5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 initial={{ strokeDasharray: "14 10 0 0" }}
                 animate={{
                   strokeDasharray: [
-                    "24 10 0 0", 
-                    "16 25 92 72", 
-                    "24 10 0 0"
+                    "16 25 92 72",
+                    "24 10 0 0",  
+                    "24 15 10 0"
                   ],
                   rotate: [0, 360]  // Rotate around the center
                 }}
